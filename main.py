@@ -6,18 +6,21 @@ from faker import Faker
 
 fake = Faker("ru_Ru")
 
-skills = ["Стремительный прыжок", "Электрический выстрел", "Ледяной удар", "Стремительный удар", "Кислотный взгляд", "Тайный побег", "Ледяной выстрел", "Огненный заряд"]
+skills = ["Стремительный прыжок", "Электрический выстрел",
+          "Ледяной удар", "Стремительный удар",
+          "Кислотный взгляд", "Тайный побег",
+          "Ледяной выстрел", "Огненный заряд"]
 
 context = {
   "first_name": fake.first_name_male(),
   "last_name": fake.last_name_male(),
   "job": fake.job(),
   "town": fake.city(),
-  "strength": random.randint(3,18),
-  "agility": random.randint(3,18),
-  "endurance": random.randint(3,18),
-  "intelligence": random.randint(3,18),
-  "luck": random.randint(3,18),
+  "strength": random.randint(3, 18),
+  "agility": random.randint(3, 18),
+  "endurance": random.randint(3, 18),
+  "intelligence": random.randint(3, 18),
+  "luck": random.randint(3, 18),
   "skill_1": "",
   "skill_2": "",
   "skill_3": ""
@@ -50,12 +53,9 @@ special_letters = {
 }
 
 file_name = "result_cards/result_card{}.svg"
-skill_pattern = "skill_{}"
+skill_pattern = "result_cards/result_card{}.svg"
 
-
-def create_path():
-    if not os.path.exists("result_cards"):
-        os.mkdir("result_cards")
+os.makedirs(skill_pattern, exist_ok=True)
 
 
 def rename_skills():
@@ -63,16 +63,15 @@ def rename_skills():
         skills_sample = random.sample(skills, 3)
         runic_skills = []
         for i in range(len(skills_sample)):
-            skill=skills_sample[i]
+            skill = skills_sample[i]
             for letter, special_letter in special_letters.items():
-                skill=skill.replace(letter, special_letter)
+                skill = skill.replace(letter, special_letter)
             runic_skills.append(skill)
-            context[skill_pattern.format(i + 1)]=runic_skills[i]
+            context[skill_pattern.format(i + 1)] = runic_skills[i]
         file_operations.render_template("hero_card.svg", file_name.format(x + 1), context)
 
 
 def main():
-    create_path()
     rename_skills()
 
 

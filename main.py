@@ -12,15 +12,15 @@ skills = ["Стремительный прыжок", "Электрический
           "Ледяной выстрел", "Огненный заряд"]
 
 context = {
-  "first_name": fake.first_name_male(),
-  "last_name": fake.last_name_male(),
-  "job": fake.job(),
-  "town": fake.city(),
-  "strength": random.randint(3, 18),
-  "agility": random.randint(3, 18),
-  "endurance": random.randint(3, 18),
-  "intelligence": random.randint(3, 18),
-  "luck": random.randint(3, 18),
+  "first_name": "",
+  "last_name": "",
+  "job": "",
+  "town": "",
+  "strength": "",
+  "agility": "",
+  "endurance": "",
+  "intelligence": "",
+  "luck": "",
   "skill_1": "",
   "skill_2": "",
   "skill_3": ""
@@ -53,15 +53,28 @@ special_letters = {
 }
 
 file_name = "result_cards/result_card{}.svg"
-skill_pattern = "result_cards/result_card{}.svg"
+skill_pattern = "skill_{}"
 
-os.makedirs(skill_pattern, exist_ok=True)
+os.makedirs("result_cards", exist_ok=True)
+
+
+def generate_random_character():
+    context["first_name"] = fake.first_name()
+    context["last_name"] = fake.last_name()
+    context["job"] = fake.job()
+    context["town"] = fake.city()
+    context["strength"] = random.randint(3, 18)
+    context["agility"] = random.randint(3, 8)
+    context["endurance"] = random.randint(3, 18)
+    context["intelligence"] = random.randint(3, 18)
+    context["luck"] = random.randint(3, 18)
 
 
 def rename_skills():
     for x in range(10):
         skills_sample = random.sample(skills, 3)
         runic_skills = []
+        generate_random_character()
         for i in range(len(skills_sample)):
             skill = skills_sample[i]
             for letter, special_letter in special_letters.items():

@@ -102,7 +102,7 @@ special_letters = {
     ' ': ' '
 }
 
-file_name = "result_cards/result_card{}.svg"
+file_name = "result_cards/result_cards{}.svg"
 skill_pattern = "skill_{}"
 
 os.makedirs("result_cards", exist_ok=True)

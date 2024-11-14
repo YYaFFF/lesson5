@@ -3,10 +3,8 @@ from faker.generator import random
 import file_operations
 from faker import Faker
 
-
-fake = Faker("ru_Ru")
-
-Skills = [
+FAKE = Faker("ru_Ru")
+SKILLS = [
     "Стремительный прыжок",
     "Электрический выстрел",
     "Ледяной удар",
@@ -16,8 +14,7 @@ Skills = [
     "Ледяной выстрел",
     "Огненный заряд"
 ]
-
-Special_letters = {
+SPECIAL_LETTERS = {
     'а': 'а͠',
     'б': 'б̋',
     'в': 'в͒͠',
@@ -86,7 +83,6 @@ Special_letters = {
     'Я': 'Я̋',
     ' ': ' '
 }
-
 context = {
     "first_name": "",
     "last_name": "",
@@ -101,7 +97,6 @@ context = {
     "skill_2": "",
     "skill_3": ""
 }
-
 file_name = "result_cards/result_cards{}.svg"
 skill_pattern = "skill_{}"
 
@@ -109,10 +104,10 @@ os.makedirs("result_cards", exist_ok=True)
 
 
 def generate_random_character():
-    context["first_name"] = fake.first_name()
-    context["last_name"] = fake.last_name()
-    context["job"] = fake.job()
-    context["town"] = fake.city()
+    context["first_name"] = FAKE.first_name()
+    context["last_name"] = FAKE.last_name()
+    context["job"] = FAKE.job()
+    context["town"] = FAKE.city()
     context["strength"] = random.randint(3, 18)
     context["agility"] = random.randint(3, 8)
     context["endurance"] = random.randint(3, 18)
@@ -122,12 +117,12 @@ def generate_random_character():
 
 def rename_skills():
     for x in range(10):
-        skills_sample = random.sample(Skills, 3)
+        skills_sample = random.sample(SKILLS, 3)
         runic_skills = []
         generate_random_character()
         for i in range(len(skills_sample)):
             skill = skills_sample[i]
-            for letter, special_letter in Special_letters.items():
+            for letter, special_letter in SPECIAL_LETTERS.items():
                 skill = skill.replace(letter, special_letter)
             runic_skills.append(skill)
             context[skill_pattern.format(i + 1)] = runic_skills[i]

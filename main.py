@@ -6,7 +6,7 @@ from faker import Faker
 
 fake = Faker("ru_Ru")
 
-skills = [
+Skills = [
     "Стремительный прыжок",
     "Электрический выстрел",
     "Ледяной удар",
@@ -17,22 +17,7 @@ skills = [
     "Огненный заряд"
 ]
 
-context = {
-  "first_name": "",
-  "last_name": "",
-  "job": "",
-  "town": "",
-  "strength": "",
-  "agility": "",
-  "endurance": "",
-  "intelligence": "",
-  "luck": "",
-  "skill_1": "",
-  "skill_2": "",
-  "skill_3": ""
-}
-
-special_letters = {
+Special_letters = {
     'а': 'а͠',
     'б': 'б̋',
     'в': 'в͒͠',
@@ -102,6 +87,21 @@ special_letters = {
     ' ': ' '
 }
 
+context = {
+    "first_name": "",
+    "last_name": "",
+    "job": "",
+    "town": "",
+    "strength": "",
+    "agility": "",
+    "endurance": "",
+    "intelligence": "",
+    "luck": "",
+    "skill_1": "",
+    "skill_2": "",
+    "skill_3": ""
+}
+
 file_name = "result_cards/result_cards{}.svg"
 skill_pattern = "skill_{}"
 
@@ -128,7 +128,7 @@ def rename_skills():
         for i in range(len(skills_sample)):
             skill = skills_sample[i]
             for letter, special_letter in special_letters.items():
-                skill = skill.replace(letter, special_letter)
+                skill = Skill.replace(letter, special_letter)
             runic_skills.append(skill)
             context[skill_pattern.format(i + 1)] = runic_skills[i]
         file_operations.render_template("hero_card.svg", file_name.format(x + 1), context)

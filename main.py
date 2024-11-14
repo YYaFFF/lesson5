@@ -122,13 +122,13 @@ def generate_random_character():
 
 def rename_skills():
     for x in range(10):
-        skills_sample = random.sample(skills, 3)
+        skills_sample = random.sample(Skills, 3)
         runic_skills = []
         generate_random_character()
         for i in range(len(skills_sample)):
             skill = skills_sample[i]
-            for letter, special_letter in special_letters.items():
-                skill = Skill.replace(letter, special_letter)
+            for letter, special_letter in Special_letters.items():
+                skill = skill.replace(letter, special_letter)
             runic_skills.append(skill)
             context[skill_pattern.format(i + 1)] = runic_skills[i]
         file_operations.render_template("hero_card.svg", file_name.format(x + 1), context)

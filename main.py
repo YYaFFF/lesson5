@@ -113,7 +113,7 @@ def generate_random_character():
     context["luck"] = random.randint(3, 18)
 
 
-def rename_skills():
+def main():
     for x in range(10):
         skills_sample = random.sample(SKILLS, 3)
         runic_skills = []
@@ -125,10 +125,6 @@ def rename_skills():
             runic_skills.append(skill)
             context["skill_{}".format(i + 1)] = runic_skills[i]
         file_operations.render_template("hero_card.svg", "result_cards/result_cards{}.svg".format(x + 1), context)
-
-
-def main():
-    rename_skills()
 
 
 if __name__ == "__main__":

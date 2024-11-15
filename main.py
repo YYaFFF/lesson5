@@ -83,19 +83,6 @@ SPECIAL_LETTERS = {
     'Я': 'Я̋',
     ' ': ' '
 }
-context = {}
-
-
-def generate_random_character():
-    context["first_name"] = FAKE.first_name()
-    context["last_name"] = FAKE.last_name()
-    context["job"] = FAKE.job()
-    context["town"] = FAKE.city()
-    context["strength"] = random.randint(3, 18)
-    context["agility"] = random.randint(3, 8)
-    context["endurance"] = random.randint(3, 18)
-    context["intelligence"] = random.randint(3, 18)
-    context["luck"] = random.randint(3, 18)
 
 
 def main():
@@ -103,7 +90,17 @@ def main():
     for x in range(10):
         skills_sample = random.sample(SKILLS, 3)
         runic_skills = []
-        generate_random_character()
+        context = {
+            "first_name": FAKE.first_name(),
+            "last_name": FAKE.last_name(),
+            "job": FAKE.job(),
+            "town": FAKE.city(),
+            "strength": random.randint(3, 18),
+            "agility": random.randint(3, 18),
+            "endurance": random.randint(3, 18),
+            "intelligence": random.randint(3, 18),
+            "luck": random.randint(3, 18),
+        }
         for i in range(len(skills_sample)):
             skill = skills_sample[i]
             for letter, special_letter in SPECIAL_LETTERS.items():

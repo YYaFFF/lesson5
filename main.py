@@ -83,22 +83,7 @@ SPECIAL_LETTERS = {
     'Я': 'Я̋',
     ' ': ' '
 }
-context = {
-    "first_name": "",
-    "last_name": "",
-    "job": "",
-    "town": "",
-    "strength": "",
-    "agility": "",
-    "endurance": "",
-    "intelligence": "",
-    "luck": "",
-    "skill_1": "",
-    "skill_2": "",
-    "skill_3": ""
-}
-
-os.makedirs("result_cards", exist_ok=True)
+context = {}
 
 
 def generate_random_character():
@@ -114,6 +99,7 @@ def generate_random_character():
 
 
 def main():
+    os.makedirs("result_cards", exist_ok=True)
     for x in range(10):
         skills_sample = random.sample(SKILLS, 3)
         runic_skills = []

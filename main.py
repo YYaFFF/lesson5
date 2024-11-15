@@ -14,20 +14,6 @@ SKILLS = [
     "Ледяной выстрел",
     "Огненный заряд"
 ]
-CONTEXT = {
-    "first_name": "",
-    "last_name": "",
-    "job": "",
-    "town": "",
-    "strength": "",
-    "agility": "",
-    "endurance": "",
-    "intelligence": "",
-    "luck": "",
-    "skill_1": "",
-    "skill_2": "",
-    "skill_3": ""
-}
 SPECIAL_LETTERS = {
     'а': 'а͠',
     'б': 'б̋',
@@ -97,21 +83,34 @@ SPECIAL_LETTERS = {
     'Я': 'Я̋',
     ' ': ' '
 }
-FILE_NAME = "result_cards/result_cards{}.svg"
-SKILL_PATTERN = "skill_{}"
+context = {
+    "first_name": "",
+    "last_name": "",
+    "job": "",
+    "town": "",
+    "strength": "",
+    "agility": "",
+    "endurance": "",
+    "intelligence": "",
+    "luck": "",
+    "skill_1": "",
+    "skill_2": "",
+    "skill_3": ""
+}
+
 os.makedirs("result_cards", exist_ok=True)
 
 
 def generate_random_character():
-    CONTEXT["first_name"] = FAKE.first_name()
-    CONTEXT["last_name"] = FAKE.last_name()
-    CONTEXT["job"] = FAKE.job()
-    CONTEXT["town"] = FAKE.city()
-    CONTEXT["strength"] = random.randint(3, 18)
-    CONTEXT["agility"] = random.randint(3, 8)
-    CONTEXT["endurance"] = random.randint(3, 18)
-    CONTEXT["intelligence"] = random.randint(3, 18)
-    CONTEXT["luck"] = random.randint(3, 18)
+    context["first_name"] = FAKE.first_name()
+    context["last_name"] = FAKE.last_name()
+    context["job"] = FAKE.job()
+    context["town"] = FAKE.city()
+    context["strength"] = random.randint(3, 18)
+    context["agility"] = random.randint(3, 8)
+    context["endurance"] = random.randint(3, 18)
+    context["intelligence"] = random.randint(3, 18)
+    context["luck"] = random.randint(3, 18)
 
 
 def rename_skills():
@@ -124,8 +123,8 @@ def rename_skills():
             for letter, special_letter in SPECIAL_LETTERS.items():
                 skill = skill.replace(letter, special_letter)
             runic_skills.append(skill)
-            CONTEXT[SKILL_PATTERN.format(i + 1)] = runic_skills[i]
-        file_operations.render_template("hero_card.svg", FILE_NAME.format(x + 1), CONTEXT)
+            context["skill_{}".format(i + 1)] = runic_skills[i]
+        file_operations.render_template("hero_card.svg", "result_cards/result_cards{}.svg".format(x + 1), context)
 
 
 def main():
